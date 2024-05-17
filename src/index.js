@@ -18,8 +18,8 @@ export default {
     const url = new URL(request.url);
     const email = url.searchParams.get('email');
     if (!email) return new Response("'email' query param missing", { status: 500 });
-    ctx.waitUntil(triggerWorkflow(env.OPENAI_API_KEY, env.GTH_API_KEY, email));
     try {
+      ctx.waitUntil(triggerWorkflow(env.OPENAI_API_KEY, env.GTH_API_KEY, email));
       return new Response("Triggered AI workflow", { status: 200 });
     } catch (e) {
       console.error("Trigger Error", e)
